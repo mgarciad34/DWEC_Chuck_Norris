@@ -2,19 +2,24 @@ export function obtenerCategorias() {
     fetch('https://api.chucknorris.io/jokes/categories')
         .then(response => response.json())
         .then(data => {
-            // El resultado de la solicitud se encuentra en 'data'
             const listaCategorias = document.getElementById('tablaCategorias');
 
             data.forEach(categoria => {
-                // Crear un elemento de enlace <a> por cada categoría
                 const enlace = document.createElement('a');
-                enlace.href = `https://api.chucknorris.io/jokes/random?category=${categoria}`;
-                enlace.textContent = categoria;
-                enlace.target = "_blank"; // Abrir el enlace en una nueva pestaña
+                enlace.href = 'frase.html';
+                enlace.target = "_blank"; 
+                enlace.textContent = categoria; // Texto del enlace
 
-                // Agregar el enlace al elemento <ul> (o <div>, <p>, etc.) en tu HTML
+                // Evento que guarda la categoria seleccionada en el localStorage
+                enlace.addEventListener('click', function() {
+                    localStorage.setItem("categoria", categoria);
+                });
+
+                const saltoLinea = document.createElement('br');
+
+                // Agregar el enlace y el salto de línea al elemento con el id "tablaCategorias"
                 listaCategorias.appendChild(enlace);
-                listaCategorias.appendChild(document.createElement('br')); // Agregar un salto de línea
+                listaCategorias.appendChild(saltoLinea);
             });
         })
         .catch(error => {
