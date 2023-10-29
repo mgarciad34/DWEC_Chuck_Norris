@@ -26,21 +26,3 @@ export function obtenerCategorias() {
             console.error('Error al obtener las categorías:', error);
         });
 }
-
-export function generarChiste(){
-    var texto = document.getElementById('textoChiste')
-    var categoriaChiste = localStorage.getItem("categoria")
-    // Verificar si se ha almacenado una categoría
-    if (categoriaChiste) {
-        fetch(`https://api.chucknorris.io/jokes/random?category=${categoriaChiste}`)
-            .then(response => response.json())
-            .then(data => {
-                texto.value = data.value
-            })
-            .catch(error => {
-                console.error('Error al obtener el chiste:', error);
-            });
-    } else {
-        console.error('No se encontró una categoría en localStorage.');
-    }
-}
